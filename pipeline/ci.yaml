@@ -9,6 +9,8 @@ variables:
     value: pipeline/tasks
 
 steps:
+- script: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.27.0/pack-v0.27.0-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
+
 - bash: $(pipelineTasksPath)/00-package-buildpack.sh
   displayName: Create buildpack
   failOnStderr: true
