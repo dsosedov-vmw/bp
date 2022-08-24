@@ -1,0 +1,18 @@
+# Buildpacks to include in builder
+[[buildpacks]]
+uri = "tapacr.azurecr.io/test-dsosedov-1/buildpacks/sqlpackage-buildpack:0.0.2"
+
+# Order used for detection
+[[order]]
+    # This buildpack will display build-time information (as a dependency)
+    [[order.group]]
+    id = "tapacr.azurecr.io/test-dsosedov-1/buildpacks/sqlpackage-buildpack"
+    version = "0.0.2"
+
+# Stack that will be used by the builder
+[stack]
+id = "com.dsosedov.stacks.libicu.bionic"
+# This image is used at runtime
+run-image = "tapacr.azurecr.io/test-dsosedov-1/stacks/libicu-run:bionic"
+# This image is used at build-time
+build-image = "tapacr.azurecr.io/test-dsosedov-1/stacks/libicu-build:bionic"
