@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- bash: $(pipelineTasksPath)/00-package-buildpack.sh
+  displayName: Create buildpack
+  failOnStderr: true
+
+- bash: $(pipelineTasksPath)/01-create-stack.sh
+  displayName: Create stack
+  failOnStderr: true
+
+- bash: $(pipelineTasksPath)/02-create-builder.sh
+  displayName: Create builder
+  failOnStderr: true
