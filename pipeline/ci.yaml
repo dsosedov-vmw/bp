@@ -4,6 +4,10 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  - name: pipelineTasksPath
+    value: pipeline/tasks
+
 steps:
 - bash: $(pipelineTasksPath)/00-package-buildpack.sh
   displayName: Create buildpack
