@@ -11,14 +11,18 @@ variables:
 steps:
 - script: (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.27.0/pack-v0.27.0-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
 
-- bash: $(pipelineTasksPath)/00-package-buildpack.sh
+- bash: $(pipelineTasksPath)/00-login-to-cr.sh
+  displayName: Login to CR
+  failOnStderr: true
+
+- bash: $(pipelineTasksPath)/01-package-buildpack.sh
   displayName: Create buildpack
   failOnStderr: true
 
-- bash: $(pipelineTasksPath)/01-create-stack.sh
+- bash: $(pipelineTasksPath)/02-create-stack.sh
   displayName: Create stack
   failOnStderr: true
 
-- bash: $(pipelineTasksPath)/02-create-builder.sh
+- bash: $(pipelineTasksPath)/03-create-builder.sh
   displayName: Create builder
   failOnStderr: true
