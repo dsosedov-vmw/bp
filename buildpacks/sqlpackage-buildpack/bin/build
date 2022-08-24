@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "===> SqlPackage Buildpack"
+
+layersdir=$1
+
+sqlpackagelayer="$layersdir"/sqlpackage
+mkdir -p "$sqlpackagelayer"
+
+echo "===> Installing SqlPackage"
+
+cp -r $(dirname $0)/../deps/sqlpackage/* "$sqlpackagelayer"
+
+echo -e '[types]\nlaunch = true' > "$layersdir/sqlpackage.toml"
+
+cat > "$layersdir/launch.toml" << EOL
+[[processes]]
+type = "worker"
+command = "$sqlpackagelayer/sqlpackage"
+default = true
+EOL
